@@ -1,5 +1,5 @@
 import http from 'http';
-import { WebSocketServer } from "ws" ;
+import { WebSocketServer  } from "ws" ;
 
 const server = http.createServer();
 const wss = new WebSocketServer({ server });
@@ -23,7 +23,7 @@ wss.on('connection', (socket) => {
       if (type == 'message') {
         if (data.comment[0].sport_who_comment !== data.targetSportId) return
         wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN && client.sportId === data.targetSportId) {
+        if (client.readyState === 1 && client.sportId === data.targetSportId) {
             client.send(JSON.stringify({ type, data: [data.comment[0]] }));
           }
         });
